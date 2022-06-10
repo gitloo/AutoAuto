@@ -9,6 +9,7 @@ class Car{
         this.acceleration=0.2;
         this.maxSpeed=3;
         this.friction=0.05;
+        this.angle=0;
 
         this.controls=new Controls();
     }
@@ -36,22 +37,25 @@ class Car{
             this.speed=0;
         }
         if(this.controls.left){
-            this.x-=2;
+            this.angle+=0.03;
         }
         if(this.controls.right){
-            this.x+=2;
+            this.angle-=0.03;
         }
-
-        this.y-=this.speed;
+        this.x-=Math.sin(this.angle)*this.speed;
+        this.y-=Math.cos(this.angle)*this.speed;
     }
 
-    draw(ctx) { // disegniamo la macchina come semplice rettangolo
-        ctx.beginPath(); // il rettangolo comincerà in una posizione x e y della finestra
-        ctx.rect(this.x-this.width/2, this.y-this.height/2, this.width, this.height); // CONTROLLARE SEMPRE CORRETTEZZA WIDTH E HEIGHT
-            // la x della macchina si troverà al centro della larghezza (larghezza/2)
-            // la y della macchina si troverà al centro dell'altezza (altezza/2)
-            // definiamo larghezza
-            // definiamo altezza
-        ctx.fill(); // con fill chiediamo al context di riempire il rettangolo
+    draw(ctx) { 
+        ctx.save(); // salviamo il canvas context
+        ctx.translate(this.x, this.y); // trasliamo il rettangolo alla coordinata(x,y) in cui vogliamo centrare la rotazione
+        ctx.rotate(-this.angle); // ruotiamo il rettangolo
+        ctx.beginPath(); 
+        // rimuoviamo this.x e this.y perchè abbiamo già traslato il rettangolo alla coordinata che ci interessa
+        ctx.rect(-this.width/2, -this.height/2, this.width, this.height);
+
+        ctx.fill(); 
+        ctx.restore(); // chiamiamo il metodo restore() perchè altrimenti si entrerebbe in un loop 
+        // di traslazione e rotazione ad ogni frame dell'animazione
     }
 }
