@@ -27,7 +27,7 @@ class Controls{
                     this.reverse=true;
                     break;       
             }
-            console.table(this);
+            // console.table(this); debugger per il controllo funzionamento tasti frecce
         }
         document.onkeyup=(event)=>{
             switch(event.key){
@@ -44,7 +44,7 @@ class Controls{
                     this.reverse=false;
                     break;       
             }
-            console.table(this);
+            // console.table(this); debugger per il controllo funzionamento tasti frecce
         }
     } 
 }
