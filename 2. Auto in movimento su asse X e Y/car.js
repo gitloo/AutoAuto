@@ -36,12 +36,17 @@ class Car{
         if(Math.abs(this.speed)<this.friction){ // se il valore assoluto (sia in avanzamento che retromarcia) è minore della frizione (cioè meno di 0.05), allora la velocità diventa 0
             this.speed=0;
         }
-        if(this.controls.left){
-            this.angle+=0.03;
+        if(this.speed!=0){
+            const flip = this.speed>0?1:-1 
+            if(this.controls.left){
+                this.angle+=0.03*flip; // quando la macchina ha una velocità positiva l'aggiunta di flip non cambierà nulla in quanto il suo valore è 1.
+            }
+            if(this.controls.right){
+                this.angle-=0.03*flip;  // quando la macchina procederà all'indietro l'aggiunta di flip (con valore -1) invertirà il segno della sottrazione (-0.03 diventerà 0.03).
+            }
+            // il valore di flip dipenderà dalla velocità: se speed è maggiore di 0 flip sarà 1 | se speed è 0 flip sarà -1. In questo modo sarà possibile invertire la rotazione nel momento in cui si procede in retromarcia
         }
-        if(this.controls.right){
-            this.angle-=0.03;
-        }
+
         this.x-=Math.sin(this.angle)*this.speed;
         this.y-=Math.cos(this.angle)*this.speed;
     }
