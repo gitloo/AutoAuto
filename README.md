@@ -1,2 +1,2 @@
 # AutoAuto
-Progetto Javascript + Machine Learning - Automobile a guida autonoma
+Automobile a guida autonoma: Javascript + Machine Learning
