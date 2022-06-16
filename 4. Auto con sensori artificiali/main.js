@@ -13,7 +13,8 @@ const car = new Car(road.getLaneCenter(1),100,30,50); // il primo valore dice al
 animate();
 
 function animate(){
-    car.update();
+    // come rilevare i bordi della strada
+    car.update(road.borders);
 
     canvas.height=window.innerHeight; // posizionando l'altezza qui la pagina risulterà formattata correttamente e la macchina rimarrà a dimensione fissa
    

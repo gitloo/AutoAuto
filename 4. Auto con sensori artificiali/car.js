@@ -16,9 +16,9 @@ class Car{
         this.controls = new Controls();
     }
 
-    update(){
+    update(roadBorders){
         this.#move(); // # davanti a un metodo lo rende privato, accessibile soltanto dalla classe che lo implementa
-        this.sensor.update();
+        this.sensor.update(roadBorders);
     }
 
     #move(){
