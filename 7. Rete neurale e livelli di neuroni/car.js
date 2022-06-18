@@ -28,7 +28,7 @@ class Car{
         if(!this.damaged){ // se la macchina si danneggia non deve potersi muovere
             this.#move(); // # davanti a un metodo lo rende privato, accessibile soltanto dalla classe che lo implementa
             this.polygon = this.#createPolygon();
-            this.damaged=this.#assesDamage(roadBorders, traffic);
+            this.damaged = this.#assesDamage(roadBorders, traffic);
         }
         if(this.sensor){
             this.sensor.update(roadBorders, traffic);
@@ -36,10 +36,10 @@ class Car{
             const offsets = this.sensor.readings.map(
                 // per ogni lettura dei sensori (s) verifichiamo che: 
                 // se sarà null allora s = 0, la nostra auto sta andando avanti e non rileva nulla.
-                // altrimenti s = 1 - s.offsets
-                s => s == null?0:1-s.offsets
-            )
-            const outputs = NeuralNetwork.feedForward(offsets, this.brain)
+                // altrimenti s = 1 - s.offset
+                s=>s==null?0:1-s.offset // questo perchè vogliamo che i neuroni ricevano valori bassi se l'oggetto è lontano e valori alti se l'oggetto è vicino
+            );
+            const outputs = NeuralNetwork.feedForward(offsets, this.brain);
             console.log(outputs);
 
             if(this.useBrain){

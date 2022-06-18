@@ -13,7 +13,7 @@ class NeuralNetwork{
     static feedForward(givenInputs,network){
         // otteniamo gli outputs richiamando il metodo feedForward del livello...
         let outputs = Level.feedForward(
-            givenInputs, network.level[0] // ...con gli input dati e il primo livello della rete neurale
+            givenInputs, network.levels[0] // ...con gli input dati e il primo livello della rete neurale
         );
         // scorriamo i livelli successivi al primo (il secondo è i = 1)
         for(let i = 1; i < network.levels.length; i++){
@@ -22,8 +22,8 @@ class NeuralNetwork{
             outputs = Level.feedForward(
                 outputs, network.levels[i] 
             );
-            return outputs; // l'output finale ci dirà se l'auto dovrà andare avanti indietro dx o sx.
         }
+        return outputs; // l'output finale ci dirà se l'auto dovrà andare avanti indietro dx o sx.
     }
 }
 
@@ -66,7 +66,7 @@ class Level{
         // per ottenere gli output scorriamo tutti gli output del livello e calcoliamo una somma tra i valori di input e i weights
         for(let i = 0; i < level.outputs.length; i++){
             let sum = 0;
-            for(let j = 0; j < level.inputs.length; i++){ // scorriamo gli input del livello
+            for(let j = 0; j < level.inputs.length; j++){ // scorriamo gli input del livello --> ERRORE!!!!!!!!!!!!!!!! Nella condizione del ciclo veniva utilizzata la variabile i invece di j
                 // per ogni neurone input di livello, andremo ad aggiungere a sum il prodotto degli elementi di inputs X il weight ottenuto dall'input j e l'output i
                 sum += level.inputs[j] * level.weights[j][i]; 
             }
